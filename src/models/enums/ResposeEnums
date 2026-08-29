@@ -1,0 +1,13 @@
+from enum import Enum
+
+class ResponseEnums(Enum):
+
+    FILE_TOO_LARGE = "File size exceeds the limit"
+    FILE_TYPE_NOT_ALLOWED = "File type not allowed"
+    FILE_NOT_FOUND = "File Not Found"
+    SUCCESS = "Success"
+    ERROR = "Error"
+    NOT_FOUND = "Not Found"
+    UNAUTHORIZED = "Unauthorized"
+    FORBIDDEN = "Forbidden"
+    BAD_REQUEST = "Bad Request"
