@@ -6,7 +6,7 @@ A domain-specific **Retrieval-Augmented Generation (RAG)** system for the **gym 
 
 `mini-rag-app` lets users upload domain documents (gym/health related content), processes and indexes them into a vector store, and answers questions using semantic search + LLM-generated, context-augmented responses.
 
-## Requirements
+## Requirementss
 
 - Python 3.10
 
