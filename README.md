@@ -1,41 +1,10 @@
-# mini-rag
+# mini-rag-app
 
-This is a minimal implementation of the RAG model for question answering.
+A domain-specific **Retrieval-Augmented Generation (RAG)** system for the **gym & health** domain — built on top of a FastAPI backend with a full production-style pipeline (vector search, LLM augmentation, background processing, and monitoring).
 
-## The Course
+## Overview
 
-This is an educational project where all of the codes where explained (step by step) via a set of `Arabic` youtube videos. Please check the list:
-
-| # | Title                                    | Link                                                                                                 | Codes                                              |
-|---|------------------------------------------|------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| 1 | About the Course ماذا ولمـــاذا          | [Video](https://www.youtube.com/watch?v=Vv6e2Rb1Q6w&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj)         | NA                                                 |
-| 2 | What will we build ماذا سنبنى في المشروع | [Video](https://www.youtube.com/watch?v=_l5S5CdxE-Q&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=2) | NA                                                 |
-| 3 | Setup your tools الأدوات الأساسية        | [Video](https://www.youtube.com/watch?v=VSFbkFRAT4w&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=3) | NA                                                 |
-| 4 | Project Architecture                     | [Video](https://www.youtube.com/watch?v=Ei_nBwBbFUQ&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=4) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-001) |
-| 5 | Welcome to FastAPI                       | [Video](https://www.youtube.com/watch?v=cpOuCdzN_Mo&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=5) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-002) |
-| 6 | Nested Routes + Env Values               | [Video](https://www.youtube.com/watch?v=CrR2Bz2Y7Hw&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=6) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-003) |
-| 7 | Uploading a File                         | [Video](https://www.youtube.com/watch?v=5alMKCbFqWs&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=7) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-004) |
-| 8 | File Processing                         | [Video](https://www.youtube.com/watch?v=gQgr2iwtSBw) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-005) |
-| 9 | Docker - MongoDB - Motor                         | [Video](https://www.youtube.com/watch?v=2NOKWm0xJAk) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-006) |
-| 10 | Mongo Schemes and Models                        | [Video](https://www.youtube.com/watch?v=zgcnnMJXXV8) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-007) |
-| 11 | Mongo Indexing                        | [Video](https://www.youtube.com/watch?v=iO8FAmUVcjE) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-008) |
-| 12 | Data Pipeline Enhancements                        | [Video](https://www.youtube.com/watch?v=4x1DuezZBDU) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-008) |
-| 13 | Checkpoint-1                        | [Video](https://www.youtube.com/watch?v=7xIsZkCisPk) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-008) |
-| 14 | LLM Factory                        | [Video](https://www.youtube.com/watch?v=5TKRIFtIQAY) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-008) |
-| 15 | Vector DB Factory                        | [Video](https://www.youtube.com/watch?v=JtS9UkvF_10) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-009) |
-| 16 | Semantic Search                       | [Video](https://www.youtube.com/watch?v=V3swQKokJW8) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-010) |
-| 17 | Augmented Answers                       | [Video](https://www.youtube.com/watch?v=1Wx8BoM5pLU) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-011) |
-| 18 | Checkpoint-1 + Fix Issues                       | [Video](https://youtu.be/6zG4Idxldvg) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-012) |
-| 19 | Ollama Local LLM Server                       | [Video](https://youtu.be/-epZ1hAAtrs) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-012) |
-| 20 | From Mongo to Postgres + SQLAlchemy & Alembic                       | [Video](https://www.youtube.com/watch?v=BVOq7Ek2Up0) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-013) |
-| 21 | The way to PgVector                       | [Video](https://www.youtube.com/watch?v=g99yq5zlYAE) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-014) |
-| 22 | App Deployments 1/2                       | [Video](https://www.youtube.com/watch?v=7QRPnAbVssg) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-015) |
-| 22 | App Deployments 2/2                       | [Video](https://www.youtube.com/watch?v=qJ5Hdyc4hDc) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-015) |
-| 24 | Celery Workers 1/2                       | [Video](https://www.youtube.com/watch?v=pX-iWWT2TJo) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-016) |
-| 25 | Celery Workers 2/2                       | [Video](https://www.youtube.com/watch?v=SZ5Aznjf8Kc) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-017) |
-
-
-
+`mini-rag-app` lets users upload domain documents (gym/health related content), processes and indexes them into a vector store, and answers questions using semantic search + LLM-generated, context-augmented responses.
 
 ## Requirements
 
@@ -51,24 +20,20 @@ sudo apt install libpq-dev gcc python3-dev
 #### Install Python using MiniConda
 
 1) Download and install MiniConda from [here](https://docs.anaconda.com/free/miniconda/#quick-command-line-install)
-2) Create a new environment using the following command:
+2) Create a new environment:
 ```bash
-$ conda create -n mini-rag python=3.10
+$ conda create -n mini-rag-app python=3.10
 ```
 3) Activate the environment:
 ```bash
-$ conda activate mini-rag
+$ conda activate mini-rag-app
 ```
 
-### (Optional) Setup you command line interface for better readability
+### (Optional) Improve your shell prompt readability
 
 ```bash
 export PS1="\[\033[01;32m\]\u@\h:\w\n\[\033[00m\]\$ "
 ```
-
-### (Optional) Run Ollama Local LLM Server using Colab + Ngrok
-
-- Check the [notebook](https://colab.research.google.com/drive/1KNi3-9KtP-k-93T3wRcmRe37mRmGhL9p?usp=sharing) + [Video](https://youtu.be/-epZ1hAAtrs)
 
 ## Installation
 
@@ -84,13 +49,13 @@ $ pip install -r requirements.txt
 $ cp .env.example .env
 ```
 
+Set your environment variables in the `.env` file (e.g. `OPENAI_API_KEY`).
+
 ### Run Alembic Migration
 
 ```bash
 $ alembic upgrade head
 ```
-
-Set your environment variables in the `.env` file. Like `OPENAI_API_KEY` value.
 
 ## Run Docker Compose Services
 
@@ -100,8 +65,6 @@ $ cp .env.example .env
 ```
 
 - update `.env` with your credentials
-
-
 
 ```bash
 $ cd docker
@@ -121,30 +84,38 @@ $ sudo docker compose up -d
 $ uvicorn main:app --reload --host 0.0.0.0 --port 5000
 ```
 
-# Celery (Development Mode)
+## Celery (Development Mode)
 
-For development, you can run Celery services manually instead of using Docker:
+For development, you can run Celery services manually instead of using Docker.
 
-To Run the **Celery worker**, you need to run the following command in a separate terminal:
+Run the **Celery worker** (in a separate terminal):
 
 ```bash
 $ python -m celery -A celery_app worker --queues=default,file_processing,data_indexing --loglevel=info
 ```
 
-To run the **Beat scheduler**, you can run the following command in a separate terminal:
+Run the **Beat scheduler** (in a separate terminal):
 
 ```bash
 $ python -m celery -A celery_app beat --loglevel=info
 ```
 
-To Run **Flower Dashboard**, you can run the following command in a separate terminal:
+Run the **Flower Dashboard** (in a separate terminal):
 
 ```bash
 $ python -m celery -A celery_app flower --conf=flowerconfig.py
 ```
 
+Open your browser at `http://localhost:5555` to view the dashboard.
 
-open your browser and go to `http://localhost:5555` to see the dashboard.
+## Tech Stack
+
+- **API**: FastAPI
+- **Database**: PostgreSQL + pgvector (via SQLAlchemy & Alembic)
+- **Background Processing**: Celery (workers + beat scheduler)
+- **Monitoring**: Flower, Grafana, Prometheus
+- **Containerization**: Docker & Docker Compose
+- **LLM / Embeddings**: pluggable LLM factory (OpenAI / Ollama-compatible)
 
 ## POSTMAN Collection
 
